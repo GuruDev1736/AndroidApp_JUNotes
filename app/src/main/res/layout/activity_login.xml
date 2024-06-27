@@ -17,17 +17,19 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/logo"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="JU-Notes"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="40dp"/>
+            android:textSize="40sp"/>
 
     </LinearLayout>
 
@@ -45,83 +47,85 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="28dp"
+            android:padding="10dp"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@color/white">
+            android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Welcome Back"
+                android:text="Welcome !"
                 android:textStyle="bold"
                 android:textColor="@color/blue"
                 android:textSize="35sp"/>
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Please Fill all the Login Details"
+                android:text="Sign in to continue"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/outline_account_circle_24"
+                    android:drawableStart="@drawable/outline_email_24"
                     android:drawablePadding="10dp"
-                    android:hint="Enter the Email Address"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 app:endIconMode="password_toggle">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/baseline_lock_outline_24"
-                    android:hint="Enter the Password"
+                    android:drawableStart="@drawable/baseline_lock_outline_24"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_btn"
+                app:cornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cornered_btn"
                 android:layout_margin="10dp"
+                android:padding="15dp"
                 android:text="Login"
                 android:textStyle="bold" />
-            <Button
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cardview_dark_background"/>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_page_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cornered_btn"
+                android:padding="15dp"
+                app:cornerRadius="10dp"
                 android:layout_margin="10dp"
                 android:text="Register"
                 android:textStyle="bold" />

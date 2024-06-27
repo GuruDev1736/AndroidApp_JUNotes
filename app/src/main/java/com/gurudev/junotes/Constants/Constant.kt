@@ -10,4 +10,11 @@ object Constant {
         Toasty.success(context,message,Toasty.LENGTH_LONG,true).show()
         return
     }
+
+    fun error(context : Context , message : String)
+    {
+        Toasty.error(context,message,Toasty.LENGTH_LONG,true).show()
+        return
+    }
+
 }

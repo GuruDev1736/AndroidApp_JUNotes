@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.gurudev.junotes.Authenthication.Activity_Login
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.R
 import com.gurudev.junotes.databinding.ActivityMainBinding
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     .permissions(Manifest.permission.POST_NOTIFICATIONS)
                     .request { allGranted, grantedList, deniedList ->
                         if (allGranted) {
-                            startActivity(Intent(this@MainActivity,Activity_Home::class.java))
+                            startActivity(Intent(this@MainActivity,Activity_Login::class.java))
                             finish()
                         } else {
                            Constant.success(this@MainActivity,"Permission Denied")
