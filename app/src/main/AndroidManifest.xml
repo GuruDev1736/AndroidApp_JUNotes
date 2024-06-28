@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -15,17 +17,17 @@
         android:theme="@style/Theme.JUNotes"
         tools:targetApi="31">
         <activity
-            android:name=".Activity_Home"
+            android:name=".Authenthication.Register"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Activity_Home"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".Activity_Register"
+            android:name=".Authenthication.Activity_Login"
             android:exported="false" />
         <activity
-            android:name=".Activity_Login"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

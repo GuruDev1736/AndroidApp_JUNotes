@@ -33,9 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        viewBinding = true
-    }
+   viewBinding{
+       enable = true
+   }
 }
 
 dependencies {
@@ -52,4 +52,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("com.airbnb.android:lottie:6.3.0")
+    implementation ("com.guolindev.permissionx:permissionx:1.8.0")
+    implementation ("com.github.GrenderG:Toasty:1.5.2")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
 }
