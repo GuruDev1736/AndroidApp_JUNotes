@@ -1,4 +1,4 @@
-package com.gurudev.junotes.ui.post
+package com.gurudev.junotes.ui.Notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gurudev.junotes.databinding.FragmentPostBinding
 
-class PostFragment : Fragment() {
+class NotificationFragment : Fragment() {
 
     private var _binding: FragmentPostBinding? = null
 
@@ -23,15 +23,11 @@ class PostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val dashboardViewModel =
-            ViewModelProvider(this).get(PostViewModel::class.java)
+            ViewModelProvider(this).get(NotificationViewModel::class.java)
 
         _binding = FragmentPostBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

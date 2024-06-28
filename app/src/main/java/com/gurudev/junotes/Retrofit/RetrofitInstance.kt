@@ -1,5 +1,8 @@
 package com.gurudev.junotes.Retrofit
 
+import android.content.Context
+import android.content.SharedPreferences
+import com.gurudev.junotes.Constants.SPref
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

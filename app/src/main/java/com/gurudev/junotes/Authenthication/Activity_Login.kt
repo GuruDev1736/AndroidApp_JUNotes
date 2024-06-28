@@ -12,6 +12,7 @@ import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.R
+import com.gurudev.junotes.Retrofit.RetrofitInstance
 import com.gurudev.junotes.ViewModel.AuthViewModel
 import com.gurudev.junotes.databinding.ActivityLoginBinding
 

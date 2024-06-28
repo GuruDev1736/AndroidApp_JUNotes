@@ -1,10 +1,10 @@
-package com.gurudev.junotes.ui.post
+package com.gurudev.junotes.ui.Notification
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class PostViewModel : ViewModel() {
+class NotificationViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

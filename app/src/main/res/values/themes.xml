@@ -9,6 +9,7 @@
         <item name="fontFamily">@font/regular</item>
 
         <item name="android:statusBarColor">@color/blue</item>
+
     </style>
 
     <style name="Theme.JUNotes" parent="Base.Theme.JUNotes" />
@@ -18,4 +19,13 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/white</item>
+    </style>
+
+
+
+
+
 </resources>

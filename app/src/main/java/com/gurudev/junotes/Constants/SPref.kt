@@ -20,7 +20,7 @@ object SPref {
 
     fun get(context : Context , prefName : String) : String {
         val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return sharedPref.getString(prefName, null).toString()
+        return sharedPref.getString(prefName, "").toString()
     }
 
     fun clear(context : Context) {

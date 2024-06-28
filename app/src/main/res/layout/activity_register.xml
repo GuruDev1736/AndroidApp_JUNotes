@@ -63,7 +63,7 @@
                         android:drawableStart="@drawable/outline_account_circle_24"
                         android:drawablePadding="10dp"
                         android:hint="Full Name"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textPersonName"
                         android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +82,7 @@
                         android:drawableStart="@drawable/outline_local_phone_24"
                         android:drawablePadding="10dp"
                         android:hint="Phone No"
-                        android:inputType="textEmailAddress"
+                        android:inputType="phone"
                         android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
