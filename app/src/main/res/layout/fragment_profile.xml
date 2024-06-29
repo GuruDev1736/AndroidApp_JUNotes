@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
     tools:context=".ui.profile.ProfileFragment">
 
     <!-- Header with Background -->
@@ -16,15 +15,18 @@
         android:padding="16dp">
 
         <!-- Edit Profile Button -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/edit_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackground"
+            android:backgroundTint="@color/white"
             android:text="Edit Profile"
-            android:textColor="@color/white"
+            app:rippleColor="@color/black"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/blue"
             android:textSize="14sp" />
 
         <!-- Circular Profile Image -->
@@ -33,7 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_profile_placeholder"
+            android:src="@drawable/logo"
             app:civ_border_width="2dp"
             app:civ_border_color="@color/white"
             android:layout_marginTop="32dp" />
@@ -69,17 +71,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp">
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
         <!-- Password Card -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,34 +94,42 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_profile_year" />
+                    android:src="@drawable/baseline_lock_outline_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Year:"
+                    android:text="Password"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/year"
+
+                <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textSize="16sp"/>
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_arrow_right" />
+
+
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Email Address Card -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,81 +141,43 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_profile_email" />
+                    android:src="@drawable/outline_email_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Emailid:"
+                    android:text="Email Address"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/email_id"
+                <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textSize="16sp"/>
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_arrow_right" />
+
+
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Fingerprint Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_profile_notes" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_gravity="center_vertical"
-                    android:text="Notes: "
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/no_notes"
-                    android:layout_width="0"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textSize="16sp"/>
-
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_arrow_right" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <!-- Support Card -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,24 +189,21 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_profile_project" />
+                    android:src="@drawable/outline_local_phone_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Projects:"
+                    android:text="Support"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/no_projects"
-                    android:layout_width="0"
+
+                <Space
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textSize="16sp"/>
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:layout_width="15dp"
@@ -241,15 +211,17 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_arrow_right" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Sign Out Card -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -261,7 +233,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_profile_signout" />
+                    android:src="@drawable/baseline_logout_24" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -279,7 +251,7 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_arrow_right" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </RelativeLayout>
