@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".ui.Notification.NotificationFragment">
+    tools:context=".Activities.ui.Notification.NotificationFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
