@@ -60,7 +60,9 @@ class Activity_Login : AppCompatActivity() {
             val intent = Intent(this@Activity_Login, Activity_Home::class.java)
             startActivity(intent)
             finish()
-            SPref.set(this@Activity_Login,SPref.token,loginResponse!!.CONTENT.token)
+            SPref.set(this@Activity_Login,SPref.token, "Bearer ${loginResponse!!.CONTENT.token}")
+            SPref.set(this@Activity_Login,SPref.userId, loginResponse.CONTENT.userId.toString())
+            SPref.set(this@Activity_Login,SPref.yearId, loginResponse.CONTENT.yearId.toString())
             Constant.success(this@Activity_Login, loginResponse.MSG)
             progress.dismiss()
         }

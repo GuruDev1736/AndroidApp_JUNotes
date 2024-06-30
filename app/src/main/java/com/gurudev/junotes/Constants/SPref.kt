@@ -8,6 +8,8 @@ object SPref {
      val email = "email"
      val password = "password"
      val token = "token"
+     val userId = "userId"
+     val yearId = "yearId"
 
     fun set(context : Context , prefName : String , text : String)
     {
