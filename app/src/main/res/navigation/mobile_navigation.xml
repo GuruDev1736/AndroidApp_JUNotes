@@ -25,4 +25,9 @@
         android:name="com.gurudev.junotes.Activities.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 
+    <fragment
+        android:id="@+id/notes"
+        android:name="com.gurudev.junotes.Activities.Notes.NotesFragment"
+        tools:layout="@layout/fragment_notes" />
+
 </navigation>

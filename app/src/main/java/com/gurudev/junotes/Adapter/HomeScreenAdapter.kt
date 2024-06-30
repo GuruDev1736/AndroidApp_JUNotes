@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.gurudev.junotes.Model.HomeScreenModel
+import com.gurudev.junotes.R
 import com.gurudev.junotes.databinding.HomescreenLayoutBinding
 
 class HomeScreenAdapter(
@@ -32,7 +34,7 @@ class HomeScreenAdapter(
             binding.text.text = buttonItem.text
             binding.layout.setOnClickListener {
                 when (buttonItem.text) {
-//                    "Create Book" -> context.startActivity(Intent(context, PublishBookActivity::class.java))
+                    "Notes" -> Navigation.findNavController(it).navigate(R.id.notes)
 //                    "Create Category" -> context.startActivity(Intent(context, CreateCategoryActivity::class.java))
                 }
             }
