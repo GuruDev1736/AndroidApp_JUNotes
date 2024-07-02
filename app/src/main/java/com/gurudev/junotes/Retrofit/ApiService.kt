@@ -27,5 +27,8 @@ interface ApiService {
     @GET("subject/{id}")
     fun getAllSubjects(@Header("Authorization") token : String, @Path("id") id : Int) : Call<getAllSubjectResponseModel>
 
+    @GET("user/{id}")
+    fun getUserById(@Header("Authorization") token : String, @Path("id") id : Int) : Call<RegisterResponseModel>
+
 
 }

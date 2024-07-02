@@ -76,6 +76,7 @@
 
         <!-- Password Card -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/changePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
@@ -101,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Password"
+                    android:text="Change Password"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
@@ -123,6 +124,7 @@
 
         <!-- Email Address Card -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/changeEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -148,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Email Address"
+                    android:text="Change Email Address"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
@@ -171,6 +173,7 @@
 
         <!-- Support Card -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/support"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -215,6 +218,7 @@
 
         <!-- Sign Out Card -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

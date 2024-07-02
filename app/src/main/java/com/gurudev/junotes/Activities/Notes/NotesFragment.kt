@@ -2,6 +2,7 @@ package com.gurudev.junotes.Activities.Notes
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.view.Display
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,9 @@ import com.gurudev.junotes.Retrofit.RetrofitInstance
 import com.gurudev.junotes.ViewModel.NotesViewModel
 import com.gurudev.junotes.databinding.FragmentHomeBinding
 import com.gurudev.junotes.databinding.FragmentNotesBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 
