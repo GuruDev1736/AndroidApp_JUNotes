@@ -1,6 +1,8 @@
 package com.gurudev.junotes.Activities.ui.profile
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,20 +10,20 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.gurudev.junotes.Authenthication.Activity_Login
+import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.R
 import com.gurudev.junotes.ViewModel.ProfileViewModel
+import com.gurudev.junotes.databinding.ChangeEmailLayoutBinding
 import com.gurudev.junotes.databinding.ChangePasswordLayoutBinding
 import com.gurudev.junotes.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
-    private lateinit var viewModel : ProfileViewModel
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private lateinit var viewModel: ProfileViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,18 +31,118 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
-        binding.changePassword.setOnClickListener{
+        binding.changePassword.setOnClickListener {
             showPasswordDialog()
         }
 
+        binding.changeEmail.setOnClickListener {
+            showEmailDialog()
+        }
 
-        return root
+        binding.logout.setOnClickListener {
+            showLogoutDialog()
+        }
+
+            return root
+        }
+
+        private fun showEmailDialog() {
+
+            val dialog = Dialog(requireContext(), R.style.TransparentDialog)
+            val binding = ChangeEmailLayoutBinding.inflate(LayoutInflater.from(requireContext()))
+            dialog.setContentView(binding.root)
+            dialog.setCancelable(false)
+            dialog.setCanceledOnTouchOutside(false)
+
+            val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(50, 0, 50, 0)
+            binding.root.layoutParams = layoutParams
+
+
+            dialog.window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+
+            binding.back.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            val email = SPref.get(requireContext(), SPref.email)
+            binding.email.setText(email)
+
+            binding.submit.setOnClickListener {
+
+                val email = binding.email.text.toString()
+                val userId = SPref.get(requireContext(), SPref.userId)
+
+                if (email.isEmpty()) {
+                    binding.email.error = "Please enter email"
+                    binding.email.requestFocus()
+                    return@setOnClickListener
+                } else {
+                    changeEmail(email, userId)
+                }
+            }
+            dialog.show()
+        }
+
+
+    private fun changeEmail(email: String , userId: String) {
+
+        val progress = CustomProgressDialog(requireContext())
+        progress.show()
+
+        viewModel.observeEmail().removeObservers(viewLifecycleOwner)
+        viewModel.observeErrorMessage().removeObservers(viewLifecycleOwner)
+
+        viewModel.observeEmail().observe(viewLifecycleOwner){data->
+            if (data != null) {
+                Constant.success(requireContext(),data.MSG)
+                progress.dismiss()
+                val intent = Intent(requireContext(),Activity_Login::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                SPref.set(requireContext(),SPref.email,email)
+            }
+        }
+
+        viewModel.observeErrorMessage().observe(viewLifecycleOwner){
+            Constant.error(requireContext(),it)
+            progress.dismiss()
+        }
+
+        viewModel.changeEmail(email,userId)
+
+
+    }
+
+    private fun showLogoutDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Sign Out")
+        builder.setMessage("Are you sure you want to logout?")
+
+        builder.setPositiveButton("Yes") { dialog, _ ->
+            // Perform logout operation here
+            dialog.dismiss()
+            // Example: Go back to login activity
+            val intent = Intent(requireContext(), Activity_Login::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun showPasswordDialog() {
@@ -67,25 +169,48 @@ class ProfileFragment : Fragment() {
         binding.change.setOnClickListener{
             val lastPassword = binding.lastPassword.text.toString()
             val newPassword = binding.newPassword.text.toString()
-
+            val userId = SPref.get(requireContext(),SPref.userId)
             if (lastPassword.isEmpty())
             {
                 binding.lastPassword.error = "Please enter last password"
+                binding.lastPassword.requestFocus()
                 return@setOnClickListener
             }
             if (newPassword.isEmpty()){
                 binding.newPassword.error = "Please enter new password"
+                binding.newPassword.requestFocus()
                 return@setOnClickListener
             }
 
-
-
-
+            changePassword(lastPassword,newPassword,userId)
         }
-
-
         dialog.show()
     }
+
+    private fun changePassword(lastPassword: String, newPassword: String, userId: String) {
+
+        val progress = CustomProgressDialog(requireContext())
+        progress.show()
+
+        viewModel.observePassword().removeObservers(viewLifecycleOwner)
+        viewModel.observeErrorMessage().removeObservers(viewLifecycleOwner)
+
+        viewModel.observePassword().observe(viewLifecycleOwner){data->
+            if (data != null) {
+                Constant.success(requireContext(),data.MSG)
+                progress.dismiss()
+            }
+        }
+
+        viewModel.observeErrorMessage().observe(viewLifecycleOwner){
+            Constant.error(requireContext(),it)
+            progress.dismiss()
+        }
+
+        viewModel.changePassword(lastPassword,newPassword,userId)
+    }
+
+
 
     override fun onStart() {
         super.onStart()

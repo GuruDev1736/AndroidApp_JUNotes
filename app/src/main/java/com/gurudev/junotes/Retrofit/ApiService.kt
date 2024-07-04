@@ -2,8 +2,12 @@ package com.gurudev.junotes.Retrofit
 
 import com.gurudev.junotes.RequestModel.LoginRequestModel
 import com.gurudev.junotes.RequestModel.RegisterRequestModel
+import com.gurudev.junotes.RequestModel.changePasswordRequestModel
 import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.getAllSubjectResponseModel
+import com.gurudev.junotes.ResponseModel.Profile.ChangePasswordResponseModel
+import com.gurudev.junotes.RequestModel.changeEmailRequestModel
+import com.gurudev.junotes.ResponseModel.Profile.changeEmailResponseModel
 import com.gurudev.junotes.ResponseModel.Register.RegisterResponseModel
 import com.gurudev.junotes.ResponseModel.Register.YearResponseModel
 import retrofit2.Call
@@ -30,5 +34,9 @@ interface ApiService {
     @GET("user/{id}")
     fun getUserById(@Header("Authorization") token : String, @Path("id") id : Int) : Call<RegisterResponseModel>
 
+    @POST("auth/changePassword")
+    fun changePassword(@Body model : changePasswordRequestModel) : Call<ChangePasswordResponseModel>
 
+    @POST("auth/changeEmail")
+    fun changeEmail(@Body model: changeEmailRequestModel):Call<changeEmailResponseModel>
 }
