@@ -14,10 +14,10 @@
         android:background="@color/blue">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:background="@color/blue"
-            android:src="@drawable/im_contactuspage" />
+            android:src="@drawable/im_contact_us_page" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
