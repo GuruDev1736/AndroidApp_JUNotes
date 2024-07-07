@@ -16,7 +16,6 @@ import com.gurudev.junotes.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var viewModel : HomeViewModel
 
     private val binding get() = _binding!!
 
@@ -25,9 +24,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-       viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -38,7 +34,7 @@ class HomeFragment : Fragment() {
             HomeScreenModel(R.drawable.code,"Programming Tutorials"),
             HomeScreenModel(R.drawable.performance,"Track Performance"),
             HomeScreenModel(R.drawable.aboutus,"About Us"),
-            HomeScreenModel(R.drawable.feedback,"Feedback")
+            HomeScreenModel(R.drawable.feedback,"Support History")
         )
 
         binding.recyclerView.adapter = HomeScreenAdapter(requireContext(), buttonList)

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.gurudev.junotes.Authenthication.Activity_Login
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
@@ -47,6 +48,10 @@ class ProfileFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             showLogoutDialog()
+        }
+
+        binding.support.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.support)
         }
 
             return root

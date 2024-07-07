@@ -30,4 +30,10 @@
         android:name="com.gurudev.junotes.Activities.Notes.NotesFragment"
         tools:layout="@layout/fragment_notes" />
 
+    <fragment
+        android:id="@+id/support"
+        android:name="com.gurudev.junotes.Activities.ui.profile.SupportFragment"
+        tools:layout="@layout/fragment_support" />
+
+
 </navigation>
