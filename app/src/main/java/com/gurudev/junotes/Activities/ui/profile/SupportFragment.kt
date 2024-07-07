@@ -11,6 +11,8 @@ import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.R
+import com.gurudev.junotes.RequestModel.SupportRequestModel
+import com.gurudev.junotes.Retrofit.RetrofitInstance
 import com.gurudev.junotes.ViewModel.ProfileViewModel
 import com.gurudev.junotes.databinding.FragmentSupportBinding
 
@@ -31,13 +33,32 @@ class SupportFragment : Fragment() {
 
         binding.sendBtn.setOnClickListener{
 
+            val progress = CustomProgressDialog(requireContext())
+
             val name = binding.name.text.toString()
             val email = binding.email.text.toString()
             val msg = binding.msg.text.toString()
 
             if (valid(name,email,msg))
             {
+                progress.show()
+                val token = SPref.get(requireContext(), SPref.token)
+                val userId = SPref.get(requireContext(), SPref.userId)
+                val model = SupportRequestModel(email,msg,name,userId)
 
+                viewModel.observeSupport().removeObservers(viewLifecycleOwner)
+                viewModel.observeErrorMessage().removeObservers(viewLifecycleOwner)
+
+                viewModel.observeSupport().observe(viewLifecycleOwner){data->
+                    Constant.success(requireContext(),data!!.MSG)
+                    progress.dismiss()
+                }
+
+                viewModel.observeErrorMessage().observe(viewLifecycleOwner){
+                    Constant.error(requireContext(),it)
+                    progress.dismiss()
+                }
+                viewModel.support(token,model)
             }
 
         }
