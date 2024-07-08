@@ -12,14 +12,12 @@
         android:gravity="center"
         android:orientation="vertical"
         android:background="@color/blue">
-
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:background="@color/blue"
             android:src="@drawable/im_contact_us_page" />
     </LinearLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/contact_form_card"
         android:layout_width="match_parent"
@@ -50,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:endIconMode="clear_text">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
@@ -58,14 +55,12 @@
                     android:hint="Name"
                     android:inputType="textPassword"
                     android:textSize="15sp" />
-
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:endIconMode="clear_text">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
@@ -73,14 +68,12 @@
                     android:hint="Email id"
                     android:inputType="textPassword"
                     android:textSize="15sp" />
-
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:endIconMode="clear_text">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/msg"
                     android:layout_width="match_parent"
@@ -89,8 +82,8 @@
                     android:gravity="top"
                     android:inputType="textPassword"
                     android:textSize="15sp" />
-
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/send_btn"
                 android:layout_width="wrap_content"
@@ -102,6 +95,4 @@
                 app:cornerRadius="10dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
 </RelativeLayout>
