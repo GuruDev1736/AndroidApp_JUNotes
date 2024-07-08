@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_gravity="center">
+
     <LinearLayout
         android:id="@+id/image_contaner"
         android:layout_width="match_parent"
@@ -53,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
-                    android:inputType="textPassword"
+                    android:inputType="textPersonName"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -66,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email id"
-                    android:inputType="textPassword"
+                    android:inputType="textEmailAddress"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +82,7 @@
                     android:layout_height="150dp"
                     android:hint="Message"
                     android:gravity="top"
-                    android:inputType="textPassword"
+                    android:inputType="textMultiLine"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

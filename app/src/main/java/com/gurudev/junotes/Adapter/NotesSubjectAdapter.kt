@@ -2,6 +2,7 @@ package com.gurudev.junotes.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -36,11 +37,9 @@ class NotesSubjectAdapter(
             binding.text.text = buttonItem.subName
 
             binding.layout.setOnClickListener {
-                when (buttonItem.subName) {
-                    "Java" ->{
-
-                    }
-                }
+                val bundle = Bundle()
+                bundle.putInt("id", buttonItem.id)
+                Navigation.findNavController(it).navigate(R.id.Subjectnotes,bundle)
             }
         }
     }
