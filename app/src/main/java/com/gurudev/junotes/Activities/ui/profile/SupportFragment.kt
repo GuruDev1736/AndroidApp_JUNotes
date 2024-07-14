@@ -52,6 +52,7 @@ class SupportFragment : Fragment() {
                 viewModel.observeSupport().observe(viewLifecycleOwner){data->
                     Constant.success(requireContext(),data!!.MSG)
                     progress.dismiss()
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
 
                 viewModel.observeErrorMessage().observe(viewLifecycleOwner){

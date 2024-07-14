@@ -20,6 +20,8 @@
             android:background="@color/blue"
             android:src="@drawable/im_contact_us_page" />
     </LinearLayout>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/contact_form_card"
         android:layout_width="match_parent"
@@ -91,7 +93,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:padding="15dp"
                 android:text="Send"
                 android:textStyle="bold"
                 app:cornerRadius="10dp" />

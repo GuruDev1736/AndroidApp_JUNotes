@@ -6,8 +6,10 @@ import com.gurudev.junotes.RequestModel.RegisterRequestModel
 import com.gurudev.junotes.RequestModel.SupportRequestModel
 import com.gurudev.junotes.RequestModel.changePasswordRequestModel
 import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.GetNotesResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.getAllSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.ChangePasswordResponseModel
+import com.gurudev.junotes.ResponseModel.Profile.GetSupportHistoryResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.SupportResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.changeEmailResponseModel
 import com.gurudev.junotes.ResponseModel.Register.RegisterResponseModel
@@ -44,5 +46,12 @@ interface ApiService {
 
     @POST("support/")
     fun getSupport(@Header("Authorization") token : String , @Body model : SupportRequestModel) : Call<SupportResponseModel>
+
+    @GET("note/subject/{id}")
+    fun getNotesBySubject(@Header("Authorization") token : String, @Path("id") id : Int) : Call<GetNotesResponseModel>
+
+    @GET("support/user/{id}")
+    fun getSupportHistory(@Header("Authorization") token : String, @Path("id") id : Int) : Call<GetSupportHistoryResponseModel>
+
 
 }

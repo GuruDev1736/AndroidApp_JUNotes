@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gurudev.junotes.Adapter.NotesSubjectAdapter
+import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.ViewModel.NotesViewModel
@@ -42,6 +43,12 @@ class SubjectFragment : Fragment() {
         viewModel.observeSubject().observe(viewLifecycleOwner){data->
             binding.recyclerView.adapter = NotesSubjectAdapter(requireContext(), data!!.CONTENT)
             progress.dismiss()
+        }
+
+        viewModel.observeError().observe(viewLifecycleOwner)
+        {
+            progress.dismiss()
+            Constant.error(requireContext(),it)
         }
 
         return binding.root

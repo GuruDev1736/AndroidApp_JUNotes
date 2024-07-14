@@ -40,6 +40,12 @@
         android:name="com.gurudev.junotes.Activities.Notes.NotesFragment"
         tools:layout="@layout/fragment_notes2" />
 
+    <fragment
+        android:id="@+id/supportHistory"
+        android:name="com.gurudev.junotes.Activities.Support.SupportHistoryFragment"
+        tools:layout="@layout/fragment_support_history" />
+
+
 
 
 </navigation>

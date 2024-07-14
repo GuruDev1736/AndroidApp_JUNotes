@@ -35,7 +35,8 @@ class HomeScreenAdapter(
             binding.layout.setOnClickListener {
                 when (buttonItem.text) {
                     "Notes" -> Navigation.findNavController(it).navigate(R.id.notes)
-//                    "Create Category" -> context.startActivity(Intent(context, CreateCategoryActivity::class.java))
+                    "Support History" -> Navigation.findNavController(it).navigate(R.id.supportHistory)
+//
                 }
             }
         }
