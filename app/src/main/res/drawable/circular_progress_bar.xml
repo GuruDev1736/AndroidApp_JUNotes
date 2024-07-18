@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background circle -->
+    <item android:id="@android:id/background">
+        <shape
+            android:innerRadiusRatio="3"
+            android:shape="ring"
+            android:thicknessRatio="8"
+            android:useLevel="false">
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <!-- Progress circle with gradient for 3D effect -->
+    <item android:id="@android:id/progress">
+        <rotate
+            android:fromDegrees="270"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="270">
+            <shape
+                android:innerRadiusRatio="3"
+                android:shape="ring"
+                android:thicknessRatio="8"
+                android:useLevel="true">
+                <gradient
+                    android:startColor="#00BCD4"
+                    android:centerColor="#00ACC1"
+                    android:endColor="#0097A7"
+                    android:type="linear"
+                    android:angle="0" />
+                <solid android:color="#00BCD4" />
+                <corners android:radius="10dp" />
+                <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp"/>
+            </shape>
+        </rotate>
+    </item>
+</layer-list>
