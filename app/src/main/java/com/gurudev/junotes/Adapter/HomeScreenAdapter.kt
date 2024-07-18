@@ -36,7 +36,7 @@ class HomeScreenAdapter(
                 when (buttonItem.text) {
                     "Notes" -> Navigation.findNavController(it).navigate(R.id.notes)
                     "Support History" -> Navigation.findNavController(it).navigate(R.id.supportHistory)
-//
+                   // "Track Performance" -> Navigation.findNavController(it).navigate(R.id.main)
                 }
             }
         }
