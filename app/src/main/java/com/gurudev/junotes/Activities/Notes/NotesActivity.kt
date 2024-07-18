@@ -1,10 +1,9 @@
 package com.gurudev.junotes.Activities.Notes
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gurudev.junotes.Adapter.NotesAdapter
@@ -16,52 +15,49 @@ import com.gurudev.junotes.ViewModel.NotesViewModel
 import com.gurudev.junotes.databinding.FragmentNotes2Binding
 
 
-class NotesFragment : Fragment() {
+class NotesActivity : AppCompatActivity() {
 
     private lateinit var binding : FragmentNotes2Binding
     private lateinit var viewModel : NotesViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = FragmentNotes2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.actionBar.toolbar.title = "Notes"
         binding.actionBar.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+            this@NotesActivity.onBackPressedDispatcher.onBackPressed()
         }
 
         viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = LinearLayoutManager(this@NotesActivity)
 
         viewModel.observeNotes()
 
-
-        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
 
-        val progress = CustomProgressDialog(requireContext())
+        val progress = CustomProgressDialog(this@NotesActivity)
         progress.show()
 
-        val token = SPref.get(requireContext(),SPref.token)
-        val bundle = arguments
-        val subjectId = bundle?.getInt("id")!!.toInt()
+        val token = SPref.get(this@NotesActivity,SPref.token)
+        val intent = intent
+        val subjectId = intent.getIntExtra("id",-1)
         viewModel.getNotes(token,subjectId)
 
 
-        viewModel.observeNotes().observe(viewLifecycleOwner){data->
-            binding.recyclerView.adapter = NotesAdapter(requireContext(),data!!.CONTENT)
+        viewModel.observeNotes().observe(this@NotesActivity){data->
+            binding.recyclerView.adapter = NotesAdapter(this@NotesActivity,data!!.CONTENT)
             progress.dismiss()
         }
 
-        viewModel.observeError().observe(viewLifecycleOwner){
+        viewModel.observeError().observe(this@NotesActivity){
             progress.dismiss()
-            Constant.error(requireContext(),it)
+            Constant.error(this@NotesActivity,it)
         }
 
     }

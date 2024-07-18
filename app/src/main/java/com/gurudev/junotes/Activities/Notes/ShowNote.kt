@@ -12,6 +12,7 @@ import com.gurudev.junotes.databinding.ActivityShowNoteBinding
 
 class ShowNote : AppCompatActivity() {
     private lateinit var binding : ActivityShowNoteBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityShowNoteBinding.inflate(layoutInflater)

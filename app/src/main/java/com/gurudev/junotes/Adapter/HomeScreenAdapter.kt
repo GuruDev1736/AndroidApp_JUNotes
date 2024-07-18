@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.gurudev.junotes.Activities.Notes.NotesActivity
+import com.gurudev.junotes.Activities.Notes.SubjectActivity
+import com.gurudev.junotes.Activities.Projects.ShowProjectsActivity
+import com.gurudev.junotes.Activities.Support.SupportHistoryActivity
 import com.gurudev.junotes.Model.HomeScreenModel
 import com.gurudev.junotes.R
 import com.gurudev.junotes.databinding.HomescreenLayoutBinding
@@ -35,8 +39,9 @@ class HomeScreenAdapter(
             binding.text.text = buttonItem.text
             binding.layout.setOnClickListener {
                 when (buttonItem.text) {
-                    "Notes" -> Navigation.findNavController(it).navigate(R.id.notes)
-                    "Support History" -> Navigation.findNavController(it).navigate(R.id.supportHistory)
+                    "Notes" -> context.startActivity(Intent(context,SubjectActivity::class.java))
+                    "Support History" -> context.startActivity(Intent(context,SupportHistoryActivity::class.java))
+                    "Projects" -> context.startActivity(Intent(context,ShowProjectsActivity::class.java))
                     "Track Performance" -> context.startActivity(Intent(context, track_performance::class.java))
                 }
             }
