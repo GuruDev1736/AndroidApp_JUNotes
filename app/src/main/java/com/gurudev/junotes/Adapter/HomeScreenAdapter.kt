@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gurudev.junotes.Model.HomeScreenModel
 import com.gurudev.junotes.R
 import com.gurudev.junotes.databinding.HomescreenLayoutBinding
+import com.gurudev.junotes.track_performance
 
 class HomeScreenAdapter(
     private val context: Context,
@@ -36,7 +37,7 @@ class HomeScreenAdapter(
                 when (buttonItem.text) {
                     "Notes" -> Navigation.findNavController(it).navigate(R.id.notes)
                     "Support History" -> Navigation.findNavController(it).navigate(R.id.supportHistory)
-                   // "Track Performance" -> Navigation.findNavController(it).navigate(R.id.main)
+                    "Track Performance" -> context.startActivity(Intent(context, track_performance::class.java))
                 }
             }
         }
