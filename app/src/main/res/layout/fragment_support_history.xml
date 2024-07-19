@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Activities.Support.SupportHistoryActivity">
 
     <include
@@ -14,6 +15,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        tools:listitem="@layout/support_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
