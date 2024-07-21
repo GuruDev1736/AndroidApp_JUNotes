@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.gurudev.junotes.Activities.Notes.NotesActivity
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Model.HomeScreenModel
 import com.gurudev.junotes.R
@@ -37,9 +38,9 @@ class NotesSubjectAdapter(
             binding.text.text = buttonItem.subName
 
             binding.layout.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putInt("id", buttonItem.id)
-                Navigation.findNavController(it).navigate(R.id.Subjectnotes,bundle)
+               val intent = Intent(context, NotesActivity::class.java)
+                intent.putExtra("id",buttonItem.id)
+                context.startActivity(intent)
             }
         }
     }

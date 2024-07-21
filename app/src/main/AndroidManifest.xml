@@ -17,6 +17,26 @@
         android:theme="@style/Theme.JUNotes"
         tools:targetApi="31" >
         <activity
+            android:name=".Activities.Projects.ShowProjectsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.Projects.ProjectDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.Notes.NotesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.Notes.SubjectActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.Support.SupportHistoryActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".track_performance"
             android:exported="false" />
         <activity

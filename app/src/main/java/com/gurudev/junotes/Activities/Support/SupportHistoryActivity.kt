@@ -1,10 +1,9 @@
 package com.gurudev.junotes.Activities.Support
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gurudev.junotes.Adapter.SupportHistoryAdapter
@@ -15,42 +14,42 @@ import com.gurudev.junotes.R
 import com.gurudev.junotes.ViewModel.SupportViewModel
 import com.gurudev.junotes.databinding.FragmentSupportHistoryBinding
 
-class SupportHistoryFragment : Fragment() {
+class SupportHistoryActivity : AppCompatActivity() {
 
     private lateinit var binding : FragmentSupportHistoryBinding
     private lateinit var viewModel : SupportViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = FragmentSupportHistoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         binding.actionBar.toolbar.title = "Support History"
         binding.actionBar.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+            this@SupportHistoryActivity.onBackPressedDispatcher.onBackPressed()
         }
 
-        val progress = CustomProgressDialog(requireContext())
+        val progress = CustomProgressDialog(this@SupportHistoryActivity)
         progress.show()
 
         viewModel = ViewModelProvider(this).get(SupportViewModel::class.java)
 
-        val token = SPref.get(requireContext(),SPref.token)
-        val userId = SPref.get(requireContext(),SPref.userId).toInt()
+        val token = SPref.get(this@SupportHistoryActivity,SPref.token)
+        val userId = SPref.get(this@SupportHistoryActivity,SPref.userId).toInt()
         viewModel.support(token,userId)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = LinearLayoutManager(this@SupportHistoryActivity)
 
-        viewModel.observeSupport().observe(viewLifecycleOwner){
+        viewModel.observeSupport().observe(this@SupportHistoryActivity){
             progress.dismiss()
-            binding.recyclerView.adapter = SupportHistoryAdapter(requireContext(),it!!.CONTENT)
+            binding.recyclerView.adapter = SupportHistoryAdapter(this@SupportHistoryActivity,it!!.CONTENT)
         }
 
-        viewModel.observeErrorMessage().observe(viewLifecycleOwner){
+        viewModel.observeErrorMessage().observe(this@SupportHistoryActivity){
             progress.dismiss()
-            Constant.error(requireContext(),it)
+            Constant.error(this@SupportHistoryActivity,it)
         }
-        return binding.root
+
     }
 }

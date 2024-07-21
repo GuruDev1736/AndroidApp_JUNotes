@@ -12,6 +12,8 @@ import com.gurudev.junotes.ResponseModel.Profile.ChangePasswordResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.GetSupportHistoryResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.SupportResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.changeEmailResponseModel
+import com.gurudev.junotes.ResponseModel.Projects.GetProjectByIdResponseModel
+import com.gurudev.junotes.ResponseModel.Projects.showAllProjectsResponseModel
 import com.gurudev.junotes.ResponseModel.Register.RegisterResponseModel
 import com.gurudev.junotes.ResponseModel.Register.YearResponseModel
 import retrofit2.Call
@@ -52,6 +54,12 @@ interface ApiService {
 
     @GET("support/user/{id}")
     fun getSupportHistory(@Header("Authorization") token : String, @Path("id") id : Int) : Call<GetSupportHistoryResponseModel>
+
+    @GET("project/")
+    fun getAllProjects(@Header("Authorization") token : String) : Call<showAllProjectsResponseModel>
+
+    @GET("project/{id}")
+    fun getProjectById(@Header("Authorization") token : String , @Path("id") id : Int) : Call<GetProjectByIdResponseModel>
 
 
 }

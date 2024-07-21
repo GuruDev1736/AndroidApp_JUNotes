@@ -1,57 +1,56 @@
 package com.gurudev.junotes.Activities.Notes
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gurudev.junotes.Adapter.NotesSubjectAdapter
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
+import com.gurudev.junotes.R
 import com.gurudev.junotes.ViewModel.NotesViewModel
 import com.gurudev.junotes.databinding.FragmentNotesBinding
 
-class SubjectFragment : Fragment() {
+class SubjectActivity : AppCompatActivity() {
 
     private lateinit var viewModel: NotesViewModel
     private lateinit var binding : FragmentNotesBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = FragmentNotesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         viewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
-        val progress = CustomProgressDialog(requireContext())
+        val progress = CustomProgressDialog(this@SubjectActivity)
         progress.show()
 
         binding.actionBar.toolbar.title = "Subjects"
         binding.actionBar.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+            this@SubjectActivity.onBackPressedDispatcher.onBackPressed()
         }
 
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.layoutManager = GridLayoutManager(this@SubjectActivity, 2)
 
-        val token = SPref.get(requireContext(), SPref.token)
-        val year = SPref.get(requireContext(), SPref.yearId).toInt()
+        val token = SPref.get(this@SubjectActivity, SPref.token)
+        val year = SPref.get(this@SubjectActivity, SPref.yearId).toInt()
 
         viewModel.getSubjects(token,year)
 
-        viewModel.observeSubject().observe(viewLifecycleOwner){data->
-            binding.recyclerView.adapter = NotesSubjectAdapter(requireContext(), data!!.CONTENT)
+        viewModel.observeSubject().observe(this@SubjectActivity){ data->
+            binding.recyclerView.adapter = NotesSubjectAdapter(this@SubjectActivity, data!!.CONTENT)
             progress.dismiss()
         }
 
-        viewModel.observeError().observe(viewLifecycleOwner)
+        viewModel.observeError().observe(this@SubjectActivity)
         {
             progress.dismiss()
-            Constant.error(requireContext(),it)
+            Constant.error(this@SubjectActivity,it)
         }
-
-        return binding.root
     }
 
 }
