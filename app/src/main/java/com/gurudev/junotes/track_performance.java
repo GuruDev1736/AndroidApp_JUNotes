@@ -8,11 +8,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -29,7 +28,7 @@ public class track_performance extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.track_performance);
+        setContentView(R.layout.track_performance_item);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -37,13 +36,15 @@ public class track_performance extends AppCompatActivity {
         });
         // Initialize the views
         ct1Input = findViewById(R.id.ct1);
-        ct2Input = findViewById(R.id.ct2);
         progressBar = findViewById(R.id.performance_progress);
         percentageText = findViewById(R.id.percentageText);
         percentageSign = findViewById(R.id.percentagesign);
         commentText = findViewById(R.id.commentText);
         statusText = findViewById(R.id.statusText);
         trackPerformanceButton = findViewById(R.id.tp_btn);
+       // Set progressbar min value to 0 and max value to 100
+        progressBar.setMin(0);
+        progressBar.setMax(100);
 
         // Set button click listener
         trackPerformanceButton.setOnClickListener(new View.OnClickListener() {
@@ -55,28 +56,30 @@ public class track_performance extends AppCompatActivity {
     }
     private void calculatePerformance() {
         String ct1String = ct1Input.getText().toString().trim();
-        String ct2String = ct2Input.getText().toString().trim();
 
-        if (ct1String.isEmpty() || ct2String.isEmpty()) {
+        if (ct1String.isEmpty()) {
             ct1Input.setError("Required");
-            ct2Input.setError("Required");
             return;
         }
 
         double ct1Marks = Double.parseDouble(ct1String);
-        double ct2Marks = Double.parseDouble(ct2String);
 
-        double totalMarks = ct1Marks + ct2Marks;
-        double percentage = (totalMarks / 300) * 100;
+        double totalMarks = ct1Marks;
+        double percentage = (totalMarks / 150) * 100;
 
         // Update the percentage text
         percentageText.setText(String.format("%.0f", percentage));
         percentageSign.setText("%");
 
+        //update the progress bar progress according to percentage
+
         // Update the status text
         if (percentage >= 40) {
             statusText.setText("PASS");
             statusText.setTextColor(Color.GREEN);
+        } else if (percentage == 0) {
+            statusText.setText(" ");
+            statusText.setTextColor(Color.WHITE);
         } else {
             statusText.setText("FAIL");
             statusText.setTextColor(Color.RED);
@@ -93,6 +96,8 @@ public class track_performance extends AppCompatActivity {
             commentText.setText("Good");
         } else if (percentage > 50) {
             commentText.setText("Nice");
+        } else if (percentage == 0){
+            commentText.setText(" ");
         } else {
             commentText.setText("Need To Work Hard");
         }
