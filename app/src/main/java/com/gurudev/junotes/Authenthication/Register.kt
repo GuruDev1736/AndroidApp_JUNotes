@@ -107,6 +107,13 @@ class Register : AppCompatActivity() {
             return false
         }
 
+        if (binding.password.text.toString().length < 8)
+        {
+            binding.password.error = "Password must be at least 8 characters"
+            binding.password.requestFocus()
+            return false
+        }
+
         return true
 
     }

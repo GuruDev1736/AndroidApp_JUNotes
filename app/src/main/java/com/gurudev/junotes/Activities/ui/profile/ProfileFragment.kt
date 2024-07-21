@@ -3,6 +3,7 @@ package com.gurudev.junotes.Activities.ui.profile
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.gurudev.junotes.ViewModel.ProfileViewModel
 import com.gurudev.junotes.databinding.ChangeEmailLayoutBinding
 import com.gurudev.junotes.databinding.ChangePasswordLayoutBinding
 import com.gurudev.junotes.databinding.FragmentProfileBinding
+import com.gurudev.junotes.databinding.GroupLayoutBinding
 
 class ProfileFragment : Fragment() {
 
@@ -54,8 +56,49 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.support)
         }
 
+        binding.group.setOnClickListener{
+            groupLinkDialog()
+        }
+
             return root
         }
+
+
+    private fun groupLinkDialog() {
+
+        val dialog = Dialog(requireContext(), R.style.TransparentDialog)
+        val binding = GroupLayoutBinding.inflate(LayoutInflater.from(requireContext()))
+        dialog.setContentView(binding.root)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+
+        val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
+        layoutParams.setMargins(50, 0, 50, 0)
+        binding.root.layoutParams = layoutParams
+
+
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        binding.telegram.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://t.me/+j9DwY9-xiUs4YjU1")
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            dialog.dismiss()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.whatsapp.setOnClickListener{
+            Constant.success(requireContext(),"We are sorry to say that this feature is not available")
+        }
+
+
+
+        dialog.show()
+    }
 
         private fun showEmailDialog() {
 
@@ -227,9 +270,14 @@ class ProfileFragment : Fragment() {
         val userId = SPref.get(requireContext(),SPref.userId).toInt()
         viewModel.getUserById(token,userId)
         viewModel.observeUser().observe(viewLifecycleOwner){data ->
-            progress.dismiss()
             binding.userName.text = data!!.CONTENT.fullName
             binding.userId.text = "User ID : "+data.CONTENT.id.toString()
+            progress.dismiss()
+        }
+
+        viewModel.observeErrorMessage().observe(viewLifecycleOwner){
+            Constant.error(requireContext(),it)
+            progress.dismiss()
         }
     }
 
