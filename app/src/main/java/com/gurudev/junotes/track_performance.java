@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class track_performance extends AppCompatActivity {
 
-    private TextInputEditText ct1Input, ct2Input;
+    private TextInputEditText ct1Input;
     private ProgressBar progressBar;
     private TextView percentageText, percentageSign, commentText, statusText;
     private MaterialButton trackPerformanceButton;
@@ -55,17 +55,29 @@ public class track_performance extends AppCompatActivity {
         });
     }
     private void calculatePerformance() {
-        String ct1String = ct1Input.getText().toString().trim();
+        String inputString = ct1Input.getText().toString().trim();
 
-        if (ct1String.isEmpty()) {
+        if (inputString.isEmpty()) {
             ct1Input.setError("Required");
             return;
         }
 
-        double ct1Marks = Double.parseDouble(ct1String);
+//        double ct1Marks = Double.parseDouble(ct1String);
+//
+//        double totalMarks = ct1Marks;
+//        double percentage = (totalMarks / 150) * 100;
 
-        double totalMarks = ct1Marks;
-        double percentage = (totalMarks / 150) * 100;
+        double percentage;
+        if (inputString.startsWith("CGPA:")) {
+            // Process CGPA input
+            String cgpaString = inputString.replace("CGPA:", "").trim();
+            double cgpa = Double.parseDouble(cgpaString);
+            percentage = (cgpa / 10) * 100;
+        } else {
+            // Process CT1 marks input
+            double ct1Marks = Double.parseDouble(inputString);
+            percentage = (ct1Marks / 150) * 100;
+        }
 
         // Update the percentage text
         percentageText.setText(String.format("%.0f", percentage));

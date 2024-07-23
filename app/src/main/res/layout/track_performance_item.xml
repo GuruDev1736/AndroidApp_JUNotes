@@ -137,6 +137,5 @@
             android:layout_below="@id/percentageText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"/>
-
     </RelativeLayout>
 </RelativeLayout>
