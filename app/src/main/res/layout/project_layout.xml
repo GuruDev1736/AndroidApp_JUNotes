@@ -61,10 +61,11 @@
 
             <!-- Buttons -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/details"
                     android:layout_width="wrap_content"
@@ -72,6 +73,21 @@
                     android:text="View Details"
                     style="?attr/materialButtonOutlinedStyle"
                     />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:text="Date"/>
+
             </LinearLayout>
 
         </LinearLayout>

@@ -16,6 +16,9 @@ import com.gurudev.junotes.ResponseModel.Projects.GetProjectByIdResponseModel
 import com.gurudev.junotes.ResponseModel.Projects.showAllProjectsResponseModel
 import com.gurudev.junotes.ResponseModel.Register.RegisterResponseModel
 import com.gurudev.junotes.ResponseModel.Register.YearResponseModel
+import com.gurudev.junotes.ResponseModel.Tut.GetAllLanguageResponseModel
+import com.gurudev.junotes.ResponseModel.Tut.GetAllTutResponseModel
+import com.gurudev.junotes.ResponseModel.Tut.GetLangByIdResponseModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -60,6 +63,15 @@ interface ApiService {
 
     @GET("project/{id}")
     fun getProjectById(@Header("Authorization") token : String , @Path("id") id : Int) : Call<GetProjectByIdResponseModel>
+
+    @GET("tut/lang/{id}")
+    fun getAllTut(@Header("Authorization") token : String , @Path("id") id : Int) : Call<GetAllTutResponseModel>
+
+    @GET("language/")
+    fun getAllLang(@Header("Authorization") token : String) : Call<GetAllLanguageResponseModel>
+
+    @GET("language/{id}")
+    fun getLangById(@Header("Authorization") token : String , @Path("id") id : Int) : Call<GetLangByIdResponseModel>
 
 
 }
