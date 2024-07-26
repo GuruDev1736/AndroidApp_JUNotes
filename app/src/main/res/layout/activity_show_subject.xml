@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
-    tools:context="User.Activities.ProgrammingTut.ShowLanguages">
+    tools:context=".Admin.Activities.Notes.Admin_ShowSubjectActivity">
 
     <include
         android:id="@+id/action_bar"
@@ -17,8 +17,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        tools:listitem="@layout/project_layout"
+        tools:listitem="@layout/homescreen_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import com.gurudev.junotes.RequestModel.RegisterRequestModel
 import com.gurudev.junotes.RequestModel.SupportRequestModel
 import com.gurudev.junotes.RequestModel.changePasswordRequestModel
 import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.GetNotesResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.getAllSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.ChangePasswordResponseModel
@@ -72,6 +73,15 @@ interface ApiService {
 
     @GET("language/{id}")
     fun getLangById(@Header("Authorization") token : String , @Path("id") id : Int) : Call<GetLangByIdResponseModel>
+
+
+    // Admin Services
+
+
+    @GET("subject/")
+    fun AdmingetAllSubjects(@Header("Authorization") token : String) : Call<AdminGetAllSubjectResponseModel>
+
+
 
 
 }

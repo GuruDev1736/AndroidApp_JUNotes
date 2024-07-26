@@ -6,8 +6,149 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ProgrammingTut.TutorialDetailActivity">
+    android:background="@color/white"
+    tools:context="User.Activities.ProgrammingTut.TutorialDetailActivity">
+
+    <include
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/action_bar"/>
 
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/createrImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:civ_border_color="@color/blue"
+        app:civ_border_width="1dp"
+        android:src="@drawable/user"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/createrName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:text="Code With harry"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            tools:text="20-10-2004"/>
+
+        <androidx.legacy.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            tools:text="Kotlin"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="Title : "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="italic"
+            tools:text="Html Course for beignners"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="Video Link : "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/videoLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="italic"
+            android:textColorLink="@color/blue"
+            android:autoLink="web"
+            tools:text="HtmlCourseforbeignners.com"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="Notes Link : "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/notesLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="italic"
+            android:textColorLink="@color/blue"
+            android:autoLink="web"
+            tools:text="HtmlCourseforbeignners.in"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

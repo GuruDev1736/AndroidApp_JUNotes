@@ -7,12 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.gurudev.junotes.Activities.Activity_Home
+import com.gurudev.junotes.Admin.Activities.Admin_HomeActivty
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.R
-import com.gurudev.junotes.Retrofit.RetrofitInstance
 import com.gurudev.junotes.ViewModel.AuthViewModel
 import com.gurudev.junotes.databinding.ActivityLoginBinding
 
@@ -57,10 +56,22 @@ class Activity_Login : AppCompatActivity() {
         }
 
         viewModel.observeLogin().observe(this) { loginResponse ->
-            val intent = Intent(this@Activity_Login, Activity_Home::class.java)
-            startActivity(intent)
-            finish()
-            SPref.set(this@Activity_Login,SPref.token, "Bearer ${loginResponse!!.CONTENT.token}")
+
+            if(loginResponse!!.CONTENT.userRole.equals("ROLE_NORMAL"))
+            {
+                val intent = Intent(this@Activity_Login, com.gurudev.junotes.User.Activities.Activity_Home::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            if(loginResponse.CONTENT.userRole.equals("ROLE_ADMIN"))
+            {
+                val intent = Intent(this@Activity_Login, Admin_HomeActivty::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            SPref.set(this@Activity_Login,SPref.token, "Bearer ${loginResponse.CONTENT.token}")
             SPref.set(this@Activity_Login,SPref.userId, loginResponse.CONTENT.userId.toString())
             SPref.set(this@Activity_Login,SPref.yearId, loginResponse.CONTENT.yearId.toString())
             Constant.success(this@Activity_Login, loginResponse.MSG)
