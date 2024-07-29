@@ -1,14 +1,17 @@
 package com.gurudev.junotes.Admin.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.gurudev.junotes.Admin.Activities.Notes.Admin_ShowNotesActivity
 import com.gurudev.junotes.R
+import com.gurudev.junotes.ResponseModel.Notes.CONTENT
 import com.gurudev.junotes.ResponseModel.Notes.Subject
 import com.gurudev.junotes.databinding.HomescreenLayoutBinding
 
-class ShowSubjectAdapter(private val context : Context , private val subjectList : List<Subject>) : RecyclerView.Adapter<ShowSubjectAdapter.onViewHolder>() {
+class ShowSubjectAdapter(private val context : Context , private val subjectList : List<CONTENT>) : RecyclerView.Adapter<ShowSubjectAdapter.onViewHolder>() {
 
     class onViewHolder(val binding : HomescreenLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -27,7 +30,9 @@ class ShowSubjectAdapter(private val context : Context , private val subjectList
             text.text = subject.subName
             icon.setImageResource(R.drawable.elearning)
             layout.setOnClickListener{
-
+                context.startActivity(Intent(context,Admin_ShowNotesActivity::class.java)
+                    .putExtra("subjectId",subject.id)
+                )
             }
         }
     }

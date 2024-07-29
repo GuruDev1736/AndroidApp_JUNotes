@@ -17,6 +17,18 @@
         android:theme="@style/Theme.JUNotes"
         tools:targetApi="31">
         <activity
+            android:name=".Admin.Activities.Notes.Admin_CreateAndUpdateYear"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.Activities.Notes.Admin_ShowYearsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.Activities.Notes.Admin_CreateAndUpdateSubject"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.Activities.Notes.Admin_CreateAndUpdateNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".Admin.Activities.Notes.Admin_ShowNotesActivity"
             android:exported="false" />
         <activity

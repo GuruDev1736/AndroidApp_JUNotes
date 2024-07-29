@@ -3,8 +3,13 @@ package com.gurudev.junotes.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gurudev.junotes.Constants.SPref
+import com.gurudev.junotes.Constants.SingleLiveEvent
+import com.gurudev.junotes.RequestModel.CreateYearRequestModel
 import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.CreateYearResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.GetNotesResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.GetYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.getAllSubjectResponseModel
 import com.gurudev.junotes.Retrofit.RetrofitInstance
 import retrofit2.Call
@@ -14,7 +19,9 @@ import retrofit2.Response
 class NotesViewModel : ViewModel() {
     private val subjectResponse = MutableLiveData<getAllSubjectResponseModel?>()
     private val notesResponse = MutableLiveData<GetNotesResponseModel?>()
-    private val getAllSubjectsResponse = MutableLiveData<AdminGetAllSubjectResponseModel?>()
+    private val deleteNoteResponse = MutableLiveData<DeleteNoteResponseModel?>()
+    private val createYearResponse = SingleLiveEvent<CreateYearResponseModel?>()
+    private val getAllYearResponse = MutableLiveData<GetYearResponseModel?>()
     private val error = MutableLiveData<String>()
 
     fun getSubjects(token : String , yearId : Int){
@@ -98,12 +105,13 @@ class NotesViewModel : ViewModel() {
         }
     }
 
-    fun getAllSubjects(token : String ){
+
+    fun deleteNote(token : String , noteId : Int){
         try {
-            RetrofitInstance.api.AdmingetAllSubjects(token).enqueue(object : Callback<AdminGetAllSubjectResponseModel>{
+            RetrofitInstance.api.deleteNote(token,noteId).enqueue(object : Callback<DeleteNoteResponseModel>{
                 override fun onResponse(
-                    call: Call<AdminGetAllSubjectResponseModel>,
-                    response: Response<AdminGetAllSubjectResponseModel>
+                    call: Call<DeleteNoteResponseModel>,
+                    response: Response<DeleteNoteResponseModel>
                 ) {
                     if (response.isSuccessful)
                     {
@@ -112,7 +120,7 @@ class NotesViewModel : ViewModel() {
                         {
                             if (data.STS=="200")
                             {
-                                getAllSubjectsResponse.value = data
+                                deleteNoteResponse.value = data
                             }
                             if (data.STS =="500")
                             {
@@ -126,10 +134,90 @@ class NotesViewModel : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<AdminGetAllSubjectResponseModel>, t: Throwable) {
+                override fun onFailure(call: Call<DeleteNoteResponseModel>, t: Throwable) {
+                    error.value = "Something went wrong"
+                }
+            })
+
+        }catch (e : Exception)
+        {
+            e.printStackTrace()
+        }
+    }
+
+
+    fun createYear(model : CreateYearRequestModel){
+        try {
+            RetrofitInstance.api.createYear(model).enqueue(object : Callback<CreateYearResponseModel>{
+                override fun onResponse(
+                    call: Call<CreateYearResponseModel>,
+                    response: Response<CreateYearResponseModel>
+                ) {
+                    if (response.isSuccessful)
+                    {
+                        val data = response.body()
+                        if (data!=null)
+                        {
+                            if (data.STS=="200")
+                            {
+                                createYearResponse.value = data
+                            }
+                            if (data.STS =="500")
+                            {
+                                error.value = data.MSG
+                            }
+                        }
+                    }
+                    else
+                    {
+                        error.value = "Something went wrong"
+                    }
+                }
+
+                override fun onFailure(call: Call<CreateYearResponseModel>, t: Throwable) {
                     error.value = "Something went wrong"
                 }
 
+            })
+
+        }catch (e : Exception)
+        {
+            e.printStackTrace()
+        }
+    }
+
+
+    fun getAllYear(){
+        try {
+            RetrofitInstance.api.getAllYear().enqueue(object : Callback<GetYearResponseModel>{
+                override fun onResponse(
+                    call: Call<GetYearResponseModel>,
+                    response: Response<GetYearResponseModel>
+                ) {
+                    if (response.isSuccessful)
+                    {
+                        val data = response.body()
+                        if (data!=null)
+                        {
+                            if (data.STS=="200")
+                            {
+                                getAllYearResponse.value = data
+                            }
+                            if (data.STS =="500")
+                            {
+                                error.value = data.MSG
+                            }
+                        }
+                    }
+                    else
+                    {
+                        error.value = "Something went wrong"
+                    }
+                }
+
+                override fun onFailure(call: Call<GetYearResponseModel>, t: Throwable) {
+                    error.value = "Something went wrong"
+                }
             })
 
         }catch (e : Exception)
@@ -148,8 +236,16 @@ class NotesViewModel : ViewModel() {
         return notesResponse
     }
 
-    fun observeGetAllSubjects() : MutableLiveData<AdminGetAllSubjectResponseModel?>{
-        return getAllSubjectsResponse
+    fun observeDeleteNote() : MutableLiveData<DeleteNoteResponseModel?>{
+        return deleteNoteResponse
+    }
+
+    fun observeCreateYear() : SingleLiveEvent<CreateYearResponseModel?>{
+        return createYearResponse
+    }
+
+    fun observeGetAllYear() : MutableLiveData<GetYearResponseModel?>{
+        return getAllYearResponse
     }
 
     fun observeError() : MutableLiveData<String>{

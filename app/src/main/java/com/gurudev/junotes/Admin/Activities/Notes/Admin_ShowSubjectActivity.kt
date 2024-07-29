@@ -1,5 +1,6 @@
 package com.gurudev.junotes.Admin.Activities.Notes
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,13 +37,18 @@ class Admin_ShowSubjectActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
 
         val token = SPref.get(this@Admin_ShowSubjectActivity,SPref.token)
-        viewModel.getAllSubjects(token)
+        val yearId = intent.getIntExtra("yearId",0)
+        viewModel.getSubjects(token,yearId)
 
         binding.recyclerView.layoutManager = GridLayoutManager(this@Admin_ShowSubjectActivity,2)
 
-        viewModel.observeGetAllSubjects().observe(this@Admin_ShowSubjectActivity){
+        viewModel.observeSubject().observe(this@Admin_ShowSubjectActivity){
             progress.dismiss()
             binding.recyclerView.adapter = ShowSubjectAdapter(this@Admin_ShowSubjectActivity,it!!.CONTENT)
+        }
+
+        binding.create.setOnClickListener{
+            startActivity(Intent(this@Admin_ShowSubjectActivity, Admin_CreateAndUpdateSubject::class.java))
         }
 
     }

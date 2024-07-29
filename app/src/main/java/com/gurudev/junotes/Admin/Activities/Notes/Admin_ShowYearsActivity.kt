@@ -1,27 +1,29 @@
 package com.gurudev.junotes.Admin.Activities.Notes
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.GridLayout
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.gurudev.junotes.Admin.Adapter.ShowNotesAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+import com.gurudev.junotes.Admin.Adapter.ShowYearAdapter
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
-import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.R
 import com.gurudev.junotes.ViewModel.NotesViewModel
-import com.gurudev.junotes.databinding.ActivityAdminGetNotesBinding
+import com.gurudev.junotes.databinding.ActivityAdminShowYearsBinding
 
-class Admin_ShowNotesActivity : AppCompatActivity() {
+class Admin_ShowYearsActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityAdminGetNotesBinding
-    private lateinit var viewModel : NotesViewModel
+    private lateinit var binding : ActivityAdminShowYearsBinding
+    private  lateinit var viewModel : NotesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAdminGetNotesBinding.inflate(layoutInflater)
+        binding = ActivityAdminShowYearsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,29 +34,34 @@ class Admin_ShowNotesActivity : AppCompatActivity() {
         val progress = CustomProgressDialog(this)
         progress.show()
 
-        binding.actionBar.toolbar.title = "Notes"
+        viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
+
+        binding.actionBar.toolbar.title = "Years"
         binding.actionBar.toolbar.setNavigationOnClickListener {
             finish()
         }
 
-        viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
+        binding.create.setOnClickListener{
+            startActivity(Intent(this, Admin_CreateAndUpdateYear::class.java)
+                .putExtra("code",0)
+            )
+        }
 
-        val token = SPref.get(this,SPref.token)
-        val subjectId = intent.getIntExtra("subjectId",0)
-        viewModel.getNotes(token,subjectId)
+        binding.recyclerView.layoutManager = GridLayoutManager(this,2)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this@Admin_ShowNotesActivity)
-
-
-        viewModel.observeNotes().observe(this){
-            binding.recyclerView.adapter = ShowNotesAdapter(this,it!!.CONTENT)
+        viewModel.getAllYear()
+        viewModel.observeGetAllYear().observe(this){
+            binding.recyclerView.adapter = ShowYearAdapter(this,it!!.CONTENT)
             progress.dismiss()
         }
 
         viewModel.observeError().observe(this){
-            progress.dismiss()
             Constant.error(this,it)
+            progress.dismiss()
         }
+
+
+
 
     }
 }

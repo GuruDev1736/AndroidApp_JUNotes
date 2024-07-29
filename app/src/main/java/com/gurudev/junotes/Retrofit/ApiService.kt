@@ -1,13 +1,17 @@
 package com.gurudev.junotes.Retrofit
 
 import com.gurudev.junotes.RequestModel.ChangeEmailRequestModel
+import com.gurudev.junotes.RequestModel.CreateYearRequestModel
 import com.gurudev.junotes.RequestModel.LoginRequestModel
 import com.gurudev.junotes.RequestModel.RegisterRequestModel
 import com.gurudev.junotes.RequestModel.SupportRequestModel
 import com.gurudev.junotes.RequestModel.changePasswordRequestModel
 import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.CreateYearResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.GetNotesResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.GetYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.getAllSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.ChangePasswordResponseModel
 import com.gurudev.junotes.ResponseModel.Profile.GetSupportHistoryResponseModel
@@ -22,6 +26,7 @@ import com.gurudev.junotes.ResponseModel.Tut.GetAllTutResponseModel
 import com.gurudev.junotes.ResponseModel.Tut.GetLangByIdResponseModel
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -77,10 +82,15 @@ interface ApiService {
 
     // Admin Services
 
+    @DELETE("note/{id}")
+    fun deleteNote(@Header("Authorization") token : String , @Path("id") id : Int) : Call<DeleteNoteResponseModel>
 
-    @GET("subject/")
-    fun AdmingetAllSubjects(@Header("Authorization") token : String) : Call<AdminGetAllSubjectResponseModel>
+    @POST("year/")
+    fun createYear(@Body model : CreateYearRequestModel) : Call<CreateYearResponseModel>
 
+
+    @GET("year/")
+    fun getAllYear() : Call<GetYearResponseModel>
 
 
 

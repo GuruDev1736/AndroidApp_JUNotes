@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Admin.Activities.Notes.Admin_ShowSubjectActivity">
+    tools:context=".Admin.Activities.Notes.Admin_ShowYearsActivity">
 
     <include
         android:id="@+id/action_bar"
@@ -16,11 +15,11 @@
         layout="@layout/action_bar"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        tools:listitem="@layout/homescreen_layout"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/action_bar"
-        android:layout_height="match_parent"/>
+        android:id="@+id/recyclerView"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create"
@@ -33,7 +32,6 @@
         android:src="@drawable/baseline_add_24"
         app:tint="@android:color/white"
         android:layout_margin="20dp"/>
-
 
 
 </RelativeLayout>
