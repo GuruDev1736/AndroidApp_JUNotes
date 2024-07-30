@@ -51,7 +51,7 @@ class Admin_ShowYearsActivity : AppCompatActivity() {
 
         viewModel.getAllYear()
         viewModel.observeGetAllYear().observe(this){
-            binding.recyclerView.adapter = ShowYearAdapter(this,it!!.CONTENT)
+            binding.recyclerView.adapter = ShowYearAdapter(this,it!!.CONTENT.toMutableList())
             progress.dismiss()
         }
 
@@ -59,9 +59,5 @@ class Admin_ShowYearsActivity : AppCompatActivity() {
             Constant.error(this,it)
             progress.dismiss()
         }
-
-
-
-
     }
 }

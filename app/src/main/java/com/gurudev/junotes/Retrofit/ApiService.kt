@@ -10,6 +10,7 @@ import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.CreateYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.DeleteYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.GetNotesResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.GetYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.getAllSubjectResponseModel
@@ -91,6 +92,10 @@ interface ApiService {
 
     @GET("year/")
     fun getAllYear() : Call<GetYearResponseModel>
+
+    @DELETE("year/{id}")
+    fun deleteYear(@Header("Authorization") token : String , @Path("id") id : Int) : Call<DeleteYearResponseModel>
+
 
 
 

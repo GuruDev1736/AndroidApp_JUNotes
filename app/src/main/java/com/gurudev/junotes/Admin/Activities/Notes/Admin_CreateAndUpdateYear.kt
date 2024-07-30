@@ -1,6 +1,7 @@
 package com.gurudev.junotes.Admin.Activities.Notes
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,16 +31,25 @@ class Admin_CreateAndUpdateYear : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
 
-        binding.actionBar.toolbar.title = "Create Year"
         binding.actionBar.toolbar.setNavigationOnClickListener {
             finish()
         }
 
         val code = intent.getIntExtra("code",-1)
+        val yearName = intent.getStringExtra("yearName")
+        val yearDescription = intent.getStringExtra("yearDescription")
+
+        if (code.equals(0))
+        {
+            binding.actionBar.toolbar.title = "Create Year"
+        }
 
         if (code.equals(1))
         {
-
+            binding.actionBar.toolbar.title = "Update Year"
+            binding.yearName.setText(yearName)
+            binding.yearDescription.setText(yearDescription)
+            binding.submit.text = "Update"
         }
 
         binding.submit.setOnClickListener{
