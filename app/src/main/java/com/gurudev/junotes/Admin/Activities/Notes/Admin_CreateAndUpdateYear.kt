@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
+import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.R
 import com.gurudev.junotes.RequestModel.CreateYearRequestModel
 import com.gurudev.junotes.ViewModel.NotesViewModel
@@ -36,12 +37,23 @@ class Admin_CreateAndUpdateYear : AppCompatActivity() {
         }
 
         val code = intent.getIntExtra("code",-1)
+        val yearId = intent.getIntExtra("yearId",-1)
         val yearName = intent.getStringExtra("yearName")
         val yearDescription = intent.getStringExtra("yearDescription")
+
 
         if (code.equals(0))
         {
             binding.actionBar.toolbar.title = "Create Year"
+            binding.submit.setOnClickListener{
+                val yearName = binding.yearName.text.toString()
+                val yearDescription = binding.yearDescription.text.toString()
+
+                if (valid(yearName,yearDescription))
+                {
+                    createyear(yearName,yearDescription)
+                }
+            }
         }
 
         if (code.equals(1))
@@ -50,30 +62,41 @@ class Admin_CreateAndUpdateYear : AppCompatActivity() {
             binding.yearName.setText(yearName)
             binding.yearDescription.setText(yearDescription)
             binding.submit.text = "Update"
-        }
+            binding.submit.setOnClickListener{
+                val yearName = binding.yearName.text.toString()
+                val yearDescription = binding.yearDescription.text.toString()
 
-        binding.submit.setOnClickListener{
-
-            val yearName = binding.yearName.text.toString()
-            val yearDescription = binding.yearDescription.text.toString()
-
-            if (valid(yearName,yearDescription))
-            {
-                if (code.equals(0))
+                if (valid(yearName,yearDescription))
                 {
-                    createyear(yearName,yearDescription)
-                }
-
-                if (code.equals(1))
-                {
-                    UpdateYear(yearName,yearDescription)
+                    UpdateYear(yearId,yearName,yearDescription)
                 }
             }
         }
     }
 
-    private fun UpdateYear(yearName: String, yearDescription: String) {
+    private fun UpdateYear(yearId: Int, yearName: String, yearDescription: String) {
 
+        val progress = CustomProgressDialog(this)
+        progress.show()
+
+        val model = CreateYearRequestModel(yearDescription,yearName)
+        val token = SPref.get(this@Admin_CreateAndUpdateYear, SPref.token)
+
+        viewModel.observeUpdateYear().removeObservers(this)
+        viewModel.observeError().removeObservers(this)
+
+        viewModel.observeUpdateYear().observe(this){
+            Constant.success(this,it!!.MSG)
+            this.onBackPressedDispatcher.onBackPressed()
+            progress.dismiss()
+        }
+
+        viewModel.observeError().observe(this){
+            Constant.error(this,it)
+            progress.dismiss()
+        }
+
+        viewModel.updateYear(token,model,yearId)
 
 
     }

@@ -27,8 +27,6 @@ class Register : AppCompatActivity() {
     private lateinit var viewModel: AuthViewModel
     private var selectedYearId: Int? = null
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gurudev.junotes.Constants.SPref
 import com.gurudev.junotes.Constants.SingleLiveEvent
+import com.gurudev.junotes.RequestModel.CreateSubjectRequestModel
 import com.gurudev.junotes.RequestModel.CreateYearRequestModel
 import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.CreateSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.CreateYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.DeleteYearResponseModel
@@ -22,8 +24,11 @@ class NotesViewModel : ViewModel() {
     private val notesResponse = MutableLiveData<GetNotesResponseModel?>()
     private val deleteNoteResponse = MutableLiveData<DeleteNoteResponseModel?>()
     private val createYearResponse = SingleLiveEvent<CreateYearResponseModel?>()
+    private val updateYearResponse = SingleLiveEvent<CreateYearResponseModel?>()
     private val getAllYearResponse = MutableLiveData<GetYearResponseModel?>()
     private val deleteYearResponse = SingleLiveEvent<DeleteYearResponseModel?>()
+    private val createSubjectResponse = MutableLiveData<CreateSubjectResponseModel?>()
+
     private val error = MutableLiveData<String>()
 
     fun getSubjects(token : String , yearId : Int){
@@ -189,6 +194,47 @@ class NotesViewModel : ViewModel() {
     }
 
 
+    fun updateYear(token: String,model : CreateYearRequestModel , id : Int){
+        try {
+            RetrofitInstance.api.updateYear(token,id,model).enqueue(object : Callback<CreateYearResponseModel>{
+                override fun onResponse(
+                    call: Call<CreateYearResponseModel>,
+                    response: Response<CreateYearResponseModel>
+                ) {
+                    if (response.isSuccessful)
+                    {
+                        val data = response.body()
+                        if (data!=null)
+                        {
+                            if (data.STS=="200")
+                            {
+                                updateYearResponse.value = data
+                            }
+                            if (data.STS =="500")
+                            {
+                                error.value = data.MSG
+                            }
+                        }
+                    }
+                    else
+                    {
+                        error.value = "Something went wrong"
+                    }
+                }
+
+                override fun onFailure(call: Call<CreateYearResponseModel>, t: Throwable) {
+                    error.value = "Something went wrong"
+                }
+
+            })
+
+        }catch (e : Exception)
+        {
+            e.printStackTrace()
+        }
+    }
+
+
     fun getAllYear(){
         try {
             RetrofitInstance.api.getAllYear().enqueue(object : Callback<GetYearResponseModel>{
@@ -267,6 +313,48 @@ class NotesViewModel : ViewModel() {
         }
     }
 
+    fun createSubject(token: String,model : CreateSubjectRequestModel){
+        try {
+            RetrofitInstance.api.createSubject(token,model).enqueue(object : Callback<CreateSubjectResponseModel>{
+                override fun onResponse(
+                    call: Call<CreateSubjectResponseModel>,
+                    response: Response<CreateSubjectResponseModel>
+                ) {
+                    if (response.isSuccessful)
+                    {
+                        val data = response.body()
+                        if (data!=null)
+                        {
+                            if (data.STS=="200")
+                            {
+                                createSubjectResponse.value = data
+                            }
+                            if (data.STS =="500")
+                            {
+                                error.value = data.MSG
+                            }
+                        }
+                    }
+                    else
+                    {
+                        error.value = "Something went wrong"
+                    }
+                }
+
+                override fun onFailure(call: Call<CreateSubjectResponseModel>, t: Throwable) {
+                    error.value = "Something went wrong"
+                }
+
+            })
+
+        }catch (e : Exception)
+        {
+            e.printStackTrace()
+        }
+    }
+
+
+
 
 
     fun observeSubject() : MutableLiveData<getAllSubjectResponseModel?>{
@@ -291,6 +379,14 @@ class NotesViewModel : ViewModel() {
 
     fun observeDeleteYear() : SingleLiveEvent<DeleteYearResponseModel?> {
         return deleteYearResponse
+    }
+
+    fun observeUpdateYear() : SingleLiveEvent<CreateYearResponseModel?>{
+        return updateYearResponse
+    }
+
+    fun observeCreateSubject() : MutableLiveData<CreateSubjectResponseModel?>{
+        return createSubjectResponse
     }
 
     fun observeError() : MutableLiveData<String>{

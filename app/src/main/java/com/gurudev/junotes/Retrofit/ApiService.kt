@@ -1,6 +1,7 @@
 package com.gurudev.junotes.Retrofit
 
 import com.gurudev.junotes.RequestModel.ChangeEmailRequestModel
+import com.gurudev.junotes.RequestModel.CreateSubjectRequestModel
 import com.gurudev.junotes.RequestModel.CreateYearRequestModel
 import com.gurudev.junotes.RequestModel.LoginRequestModel
 import com.gurudev.junotes.RequestModel.RegisterRequestModel
@@ -8,6 +9,7 @@ import com.gurudev.junotes.RequestModel.SupportRequestModel
 import com.gurudev.junotes.RequestModel.changePasswordRequestModel
 import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.CreateSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.CreateYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.DeleteYearResponseModel
@@ -31,6 +33,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -89,14 +92,16 @@ interface ApiService {
     @POST("year/")
     fun createYear(@Body model : CreateYearRequestModel) : Call<CreateYearResponseModel>
 
-
     @GET("year/")
     fun getAllYear() : Call<GetYearResponseModel>
 
     @DELETE("year/{id}")
     fun deleteYear(@Header("Authorization") token : String , @Path("id") id : Int) : Call<DeleteYearResponseModel>
 
+    @PUT("year/{id}")
+    fun updateYear(@Header("Authorization") token : String , @Path("id") id : Int , @Body model : CreateYearRequestModel) : Call<CreateYearResponseModel>
 
-
+    @POST("subject/")
+    fun createSubject(@Header("Authorization") token : String , @Body model : CreateSubjectRequestModel) : Call<CreateSubjectResponseModel>
 
 }

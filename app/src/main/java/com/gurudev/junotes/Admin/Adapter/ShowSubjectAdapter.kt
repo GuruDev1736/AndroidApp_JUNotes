@@ -3,6 +3,7 @@ package com.gurudev.junotes.Admin.Adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gurudev.junotes.Admin.Activities.Notes.Admin_ShowNotesActivity
@@ -29,10 +30,19 @@ class ShowSubjectAdapter(private val context : Context , private val subjectList
             val subject = subjectList[position]
             text.text = subject.subName
             icon.setImageResource(R.drawable.elearning)
+            buttons.visibility = View.VISIBLE
             layout.setOnClickListener{
                 context.startActivity(Intent(context,Admin_ShowNotesActivity::class.java)
                     .putExtra("subjectId",subject.id)
                 )
+            }
+
+            update.setOnClickListener{
+
+            }
+
+            delete.setOnClickListener{
+
             }
         }
     }

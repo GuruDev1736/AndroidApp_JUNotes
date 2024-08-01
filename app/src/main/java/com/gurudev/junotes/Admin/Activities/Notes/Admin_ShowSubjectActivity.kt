@@ -48,7 +48,9 @@ class Admin_ShowSubjectActivity : AppCompatActivity() {
         }
 
         binding.create.setOnClickListener{
-            startActivity(Intent(this@Admin_ShowSubjectActivity, Admin_CreateAndUpdateSubject::class.java))
+            startActivity(Intent(this@Admin_ShowSubjectActivity, Admin_CreateAndUpdateSubject::class.java)
+                .putExtra("code",0)
+            )
         }
 
     }

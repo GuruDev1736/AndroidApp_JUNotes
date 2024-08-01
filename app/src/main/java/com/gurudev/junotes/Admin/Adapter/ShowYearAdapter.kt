@@ -54,6 +54,7 @@ class ShowYearAdapter(val context: Context, val yearList: MutableList<Years>) : 
                 context.startActivity(
                     Intent(context, Admin_CreateAndUpdateYear::class.java)
                         .putExtra("code", 1)
+                        .putExtra("yearId", yearList[position].id)
                         .putExtra("yearName", yearList[position].yearName)
                         .putExtra("yearDescription", yearList[position].yearDescription)
                 )
@@ -86,7 +87,7 @@ class ShowYearAdapter(val context: Context, val yearList: MutableList<Years>) : 
         viewModel.observeError().removeObservers(context as AppCompatActivity)
 
         viewModel.observeDeleteYear().observe(context as AppCompatActivity) { data ->
-            Constant.success(context, data.MSG)
+            Constant.success(context, data!!.MSG)
             val position = yearList.indexOfFirst { it.id == id }
             if (position != -1) {
                 yearList.removeAt(position)
