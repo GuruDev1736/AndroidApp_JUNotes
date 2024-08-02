@@ -63,7 +63,7 @@ class ShowYearAdapter(val context: Context, val yearList: MutableList<Years>) : 
             delete.setOnClickListener {
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("Delete Confirmation")
-                builder.setMessage("Are you sure you want to delete this item?")
+                builder.setMessage("Are you sure you want to delete this Year?")
                 builder.setPositiveButton("Yes") { dialog, which ->
                     deleteItem(yearList[position].id)
                 }

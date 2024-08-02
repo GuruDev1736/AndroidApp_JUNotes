@@ -26,6 +26,7 @@ class Admin_CreateAndUpdateSubject : AppCompatActivity() {
     private var selectedYearId: Int? = null
     private lateinit var viewModel: AuthViewModel
     private lateinit var subjectViewModel : NotesViewModel
+    private var yearIdForUpdate: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,13 +66,57 @@ class Admin_CreateAndUpdateSubject : AppCompatActivity() {
                     val model = CreateSubjectRequestModel(subjectDescription,subjectName,year!!)
                     createSubject(token,model,progress)
                 }
-
-
             }
         }
 
+        if (code.equals(1))
+        {
+            binding.actionBar.toolbar.title = "Update Subject"
+            binding.submit.text = "Update"
+            val subjectName = intent.getStringExtra("subjectName")
+            val subjectDescription = intent.getStringExtra("subjectDescription")
+            val yearId = intent.getIntExtra("yearId",-1)
+            yearIdForUpdate = yearId
+            val subjectId = intent.getIntExtra("subjectId",-1)
+
+            binding.subjectName.setText(subjectName)
+            binding.subjectDescription.setText(subjectDescription)
+
+            binding.submit.setOnClickListener{
+                val subjectName = binding.subjectName.text.toString()
+                val subjectDescription = binding.subjectDescription.text.toString()
+                val year = selectedYearId
+
+                if(valid(subjectName,subjectDescription))
+                {
+                    val progress = CustomProgressDialog(this@Admin_CreateAndUpdateSubject)
+                    progress.show()
+                    val model = CreateSubjectRequestModel(subjectDescription,subjectName,year!!)
+                    updateSubject(token,model,progress,subjectId)
+                }
+            }
+        }
+    }
 
 
+
+    private fun updateSubject(token: String, model: CreateSubjectRequestModel, progress: CustomProgressDialog, subjectId: Int) {
+
+        subjectViewModel.observeUpdateSubject().removeObservers(this@Admin_CreateAndUpdateSubject)
+        subjectViewModel.observeError().removeObservers(this@Admin_CreateAndUpdateSubject)
+
+        subjectViewModel.observeUpdateSubject().observe(this@Admin_CreateAndUpdateSubject){data->
+            Constant.success(this@Admin_CreateAndUpdateSubject,data!!.MSG)
+            progress.dismiss()
+            finish()
+        }
+
+        subjectViewModel.observeError().observe(this@Admin_CreateAndUpdateSubject){
+            Constant.error(this@Admin_CreateAndUpdateSubject,it)
+            progress.dismiss()
+        }
+
+        subjectViewModel.updateSubject(token,model,subjectId)
 
 
     }
@@ -147,7 +192,15 @@ class Admin_CreateAndUpdateSubject : AppCompatActivity() {
                     Constant.error(this@Admin_CreateAndUpdateSubject,"Nothing is selected")
                 }
             }
+            setYearSpinnerSelection(yearList, yearIdForUpdate)
+        }
+    }
 
+
+    private fun setYearSpinnerSelection(yearList: List<YearData>, yearId: Int) {
+        val position = yearList.indexOfFirst { yearData -> yearData.id == yearId }
+        if (position >= 0) {
+            binding.year.setSelection(position)
         }
     }
 }

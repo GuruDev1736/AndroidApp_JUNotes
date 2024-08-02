@@ -44,7 +44,7 @@ class Admin_ShowSubjectActivity : AppCompatActivity() {
 
         viewModel.observeSubject().observe(this@Admin_ShowSubjectActivity){
             progress.dismiss()
-            binding.recyclerView.adapter = ShowSubjectAdapter(this@Admin_ShowSubjectActivity,it!!.CONTENT)
+            binding.recyclerView.adapter = ShowSubjectAdapter(this@Admin_ShowSubjectActivity,it!!.CONTENT.toMutableList())
         }
 
         binding.create.setOnClickListener{

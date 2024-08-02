@@ -1,5 +1,6 @@
 package com.gurudev.junotes.Admin.Activities.Notes
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -54,6 +55,14 @@ class Admin_ShowNotesActivity : AppCompatActivity() {
         viewModel.observeError().observe(this){
             progress.dismiss()
             Constant.error(this,it)
+        }
+
+        binding.create.setOnClickListener{
+            startActivity(
+                Intent(this@Admin_ShowNotesActivity, Admin_CreateAndUpdateNoteActivity::class.java)
+                .putExtra("code",0)
+                .putExtra("subjectId",subjectId)
+            )
         }
 
     }

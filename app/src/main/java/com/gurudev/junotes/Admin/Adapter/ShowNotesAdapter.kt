@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.gurudev.junotes.Admin.Activities.Notes.Admin_CreateAndUpdateNoteActivity
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Constants.CustomProgressDialog
 import com.gurudev.junotes.Constants.SPref
+import com.gurudev.junotes.R
 import com.gurudev.junotes.ResponseModel.Notes.CONTENTX
 import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
+import com.gurudev.junotes.User.Activities.Notes.ShowNote
 import com.gurudev.junotes.ViewModel.NotesViewModel
 import com.gurudev.junotes.databinding.HomescreenLayoutBinding
 import com.gurudev.junotes.databinding.NotesLayoutBinding
@@ -53,6 +57,20 @@ class ShowNotesAdapter(private val context : Context ,private val notesList : Li
             update.setOnClickListener{
                 context.startActivity(Intent(context,Admin_CreateAndUpdateNoteActivity::class.java)
                     .putExtra("code",1)
+                    .putExtra("subjectId",note.subjectId)
+                    .putExtra("noteId",note.id)
+                    .putExtra("title",note.title)
+                    .putExtra("notesUrl",note.url)
+                    .putExtra("imageUrl",note.imageUrl)
+
+                )
+            }
+            Glide.with(context).load(note.imageUrl).placeholder(R.drawable.code).into(filePreview)
+
+            layout.setOnClickListener{
+                context.startActivity(Intent(context,ShowNote::class.java)
+                    .putExtra("link",note.url)
+                    .putExtra("title",note.title)
                 )
             }
 
@@ -99,8 +117,9 @@ class ShowNotesAdapter(private val context : Context ,private val notesList : Li
     }
 
     private fun timestampToDateTime(timestamp: Long): String {
-        val sdf = SimpleDateFormat("dd-mm-yyyy HH:mm:ss", Locale.getDefault())
-        return sdf.format(Date(timestamp))
+        val date = Date(timestamp)
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return dateFormat.format(date)
     }
 
 }

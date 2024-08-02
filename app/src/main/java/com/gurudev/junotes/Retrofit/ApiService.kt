@@ -1,14 +1,16 @@
 package com.gurudev.junotes.Retrofit
 
 import com.gurudev.junotes.RequestModel.ChangeEmailRequestModel
+import com.gurudev.junotes.RequestModel.CreateNoteRequestModel
 import com.gurudev.junotes.RequestModel.CreateSubjectRequestModel
 import com.gurudev.junotes.RequestModel.CreateYearRequestModel
 import com.gurudev.junotes.RequestModel.LoginRequestModel
 import com.gurudev.junotes.RequestModel.RegisterRequestModel
 import com.gurudev.junotes.RequestModel.SupportRequestModel
+import com.gurudev.junotes.RequestModel.UpdateNoteRequestModel
 import com.gurudev.junotes.RequestModel.changePasswordRequestModel
 import com.gurudev.junotes.ResponseModel.Login.LoginResponseModel
-import com.gurudev.junotes.ResponseModel.Notes.AdminGetAllSubjectResponseModel
+import com.gurudev.junotes.ResponseModel.Notes.CreateNoteResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.CreateSubjectResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.CreateYearResponseModel
 import com.gurudev.junotes.ResponseModel.Notes.DeleteNoteResponseModel
@@ -103,5 +105,19 @@ interface ApiService {
 
     @POST("subject/")
     fun createSubject(@Header("Authorization") token : String , @Body model : CreateSubjectRequestModel) : Call<CreateSubjectResponseModel>
+
+    @PUT("subject/{id}")
+    fun updateSubject(@Header("Authorization") token : String , @Body model : CreateSubjectRequestModel , @Path("id") id: Int) : Call<CreateSubjectResponseModel>
+
+    @DELETE("subject/{id}")
+    fun deleteSubject(@Header("Authorization") token : String , @Path("id") id : Int) : Call<DeleteYearResponseModel>
+
+    @POST("note/")
+    fun createNote(@Header("Authorization") token : String , @Body model : CreateNoteRequestModel) : Call<CreateNoteResponseModel>
+
+    @PUT("note/{id}")
+    fun updateNote(@Header("Authorization") token : String , @Body model : UpdateNoteRequestModel , @Path("id") id: Int) : Call<CreateNoteResponseModel>
+
+
 
 }

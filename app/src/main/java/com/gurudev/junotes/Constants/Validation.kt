@@ -1,5 +1,9 @@
 package com.gurudev.junotes.Constants
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
+import android.widget.EditText
 import org.intellij.lang.annotations.Pattern
 
 object Validation {
@@ -14,6 +18,8 @@ object Validation {
         val pattern = android.util.Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
     }
+
+
 
 
 
