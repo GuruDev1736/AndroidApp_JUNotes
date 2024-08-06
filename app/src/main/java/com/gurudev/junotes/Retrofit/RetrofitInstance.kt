@@ -9,8 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://junotes-uat.up.railway.app/"
-//    private const val BASE_URL = "https://junotes-prod.up.railway.app/"
+//    private const val BASE_URL = "https://junotes-uat.up.railway.app/"
+    private const val BASE_URL = "https://junotes-prod.up.railway.app/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

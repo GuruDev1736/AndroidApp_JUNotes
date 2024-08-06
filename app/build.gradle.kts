@@ -14,7 +14,7 @@ android {
         applicationId = "com.gurudev.junotes"
         minSdk = 27
         targetSdk = 34
-        versionCode = 6
+        versionCode = 7
         versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
