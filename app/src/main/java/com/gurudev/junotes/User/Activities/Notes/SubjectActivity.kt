@@ -1,6 +1,7 @@
 package com.gurudev.junotes.User.Activities.Notes
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -42,7 +43,12 @@ class SubjectActivity : AppCompatActivity() {
         viewModel.getSubjects(token,year)
 
         viewModel.observeSubject().observe(this@SubjectActivity){ data->
-            binding.recyclerView.adapter = NotesSubjectAdapter(this@SubjectActivity, data!!.CONTENT)
+
+            if (data!!.CONTENT.isEmpty()) {
+                binding.note.visibility = View.VISIBLE
+            }
+
+            binding.recyclerView.adapter = NotesSubjectAdapter(this@SubjectActivity, data.CONTENT)
             progress.dismiss()
         }
 

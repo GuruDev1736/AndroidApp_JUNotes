@@ -5,6 +5,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.gurudev.junotes.R
 import com.gurudev.junotes.ResponseModel.Notes.CONTENTX
 import com.gurudev.junotes.User.Activities.Notes.ShowNote
 import com.gurudev.junotes.databinding.NotesLayoutBinding
@@ -36,6 +38,7 @@ class NotesAdapter(
             title.text = data.title
             uploadedBy.text = data.user.fullName
             date.text = timestampToDateTime(data.date)
+            Glide.with(context).load(data.imageUrl).placeholder(R.drawable.code).into(filePreview)
             layout.setOnClickListener {
                 context.startActivity(
                     Intent(context, ShowNote::class.java)
@@ -47,8 +50,9 @@ class NotesAdapter(
     }
 
     private fun timestampToDateTime(timestamp: Long): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        return sdf.format(Date(timestamp))
+        val date = Date(timestamp)
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return dateFormat.format(date)
     }
 
     fun filter(text: String) {

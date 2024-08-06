@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gurudev.junotes.Admin.Activities.Notes.Admin_ShowSubjectActivity
 import com.gurudev.junotes.Admin.Activities.Notes.Admin_ShowYearsActivity
+import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Model.HomeScreenModel
 import com.gurudev.junotes.User.Activities.Notes.SubjectActivity
 import com.gurudev.junotes.User.Activities.ProgrammingTut.ShowLanguages
@@ -40,11 +41,14 @@ class HomeScreenAdapter(
             binding.layout.setOnClickListener {
                 when (buttonItem.text) {
                     "Notes" -> context.startActivity(Intent(context, SubjectActivity::class.java))
-                    "Support History" -> context.startActivity(Intent(context,
-                        SupportHistoryActivity::class.java))
-                    "Projects" -> context.startActivity(Intent(context, ShowProjectsActivity::class.java))
-                    "Track Performance" -> context.startActivity(Intent(context, com.gurudev.junotes.User.Activities.TrackProgress.track_performance::class.java))
-                    "Programming Tutorials" -> context.startActivity(Intent(context, ShowLanguages::class.java))
+                    "Support History" -> Constant.success(context,"Coming Soon")
+                        //context.startActivity(Intent(context, SupportHistoryActivity::class.java))
+                    "Projects" ->Constant.success(context,"Coming Soon")
+//                        context.startActivity(Intent(context, ShowProjectsActivity::class.java))
+                    "Track Performance" ->Constant.success(context,"Coming Soon")
+//                        context.startActivity(Intent(context, track_performance::class.java))
+                    "Programming Tutorials" -> Constant.success(context,"Coming Soon")
+//                        context.startActivity(Intent(context, ShowLanguages::class.java))
                     "Create Notes" -> context.startActivity(Intent(context, Admin_ShowYearsActivity::class.java))
                 }
             }

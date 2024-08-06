@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Activities.Notes.SubjectActivity">
+    tools:context=".User.Activities.Notes.SubjectActivity">
 
     <include
         android:id="@+id/action_bar"
@@ -13,11 +13,28 @@
         android:layout_height="wrap_content"
         layout="@layout/action_bar"/>
 
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/recyclerView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="Sorry Subject are not currently available"
+        android:textColor="@color/red"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/action_bar"
         android:id="@+id/recyclerView"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
 
-</LinearLayout>
+</RelativeLayout>

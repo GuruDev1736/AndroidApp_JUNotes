@@ -3,6 +3,7 @@ package com.gurudev.junotes.User.Activities.Notes
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +61,11 @@ class NotesActivity : AppCompatActivity() {
 
         viewModel.observeNotes().observe(this@NotesActivity) { data ->
             data?.CONTENT?.let {
+                if (it.isEmpty()){
+                    binding.note.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.searchView.visibility = View.GONE
+                }
                 adapter.updateNotes(it)
                 progress.dismiss()
             }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ui.profile.ProfileFragment">
+    tools:context=".User.Activities.ui.profile.ProfileFragment">
 
     <!-- Header with Background -->
     <RelativeLayout
@@ -15,21 +15,24 @@
         android:padding="16dp">
 
         <!-- Edit Profile Button -->
+
+        <!-- Circular Profile Image -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/edit_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
             android:backgroundTint="@color/white"
-            android:text="Edit Profile"
-            app:rippleColor="@color/black"
             android:clickable="true"
             android:focusable="true"
+            android:text="Edit Profile"
             android:textColor="@color/blue"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:rippleColor="@color/black" />
 
-        <!-- Circular Profile Image -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="100dp"

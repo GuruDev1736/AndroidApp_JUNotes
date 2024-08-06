@@ -62,7 +62,6 @@ class ShowNotesAdapter(private val context : Context ,private val notesList : Li
                     .putExtra("title",note.title)
                     .putExtra("notesUrl",note.url)
                     .putExtra("imageUrl",note.imageUrl)
-
                 )
             }
             Glide.with(context).load(note.imageUrl).placeholder(R.drawable.code).into(filePreview)

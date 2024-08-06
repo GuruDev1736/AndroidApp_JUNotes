@@ -1,5 +1,6 @@
 package com.gurudev.junotes.User.Activities.ui.profile
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
@@ -28,6 +29,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private lateinit var viewModel: ProfileViewModel
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,8 +62,10 @@ class ProfileFragment : Fragment() {
             groupLinkDialog()
         }
 
-            return root
-        }
+        binding.editProfile.visibility = View.INVISIBLE
+
+        return root
+    }
 
 
     private fun groupLinkDialog() {
