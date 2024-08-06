@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "501229463151",
+    "project_id": "junotes-edc7a",
+    "storage_bucket": "junotes-edc7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501229463151:android:386430482e9dc494e94f9a",
+        "android_client_info": {
+          "package_name": "com.gurudev.junotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-iez2kyaHYc6u4L2qdhoNX7ovAOwK6_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
