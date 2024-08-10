@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gurudev.junotes.Admin.Activities.Notes.Admin_ShowSubjectActivity
 import com.gurudev.junotes.Admin.Activities.Notes.Admin_ShowYearsActivity
+import com.gurudev.junotes.Admin.Activities.Projects.Admin_ShowProjects
 import com.gurudev.junotes.Constants.Constant
 import com.gurudev.junotes.Model.HomeScreenModel
 import com.gurudev.junotes.User.Activities.Notes.SubjectActivity
@@ -50,6 +51,7 @@ class HomeScreenAdapter(
                     "Programming Tutorials" -> Constant.success(context,"Coming Soon")
 //                        context.startActivity(Intent(context, ShowLanguages::class.java))
                     "Create Notes" -> context.startActivity(Intent(context, Admin_ShowYearsActivity::class.java))
+                    "Create Projects" -> context.startActivity(Intent(context, Admin_ShowProjects::class.java))
                 }
             }
         }

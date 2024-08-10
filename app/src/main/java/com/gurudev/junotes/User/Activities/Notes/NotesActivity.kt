@@ -63,8 +63,10 @@ class NotesActivity : AppCompatActivity() {
             data?.CONTENT?.let {
                 if (it.isEmpty()){
                     binding.note.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
-                    binding.searchView.visibility = View.GONE
+                }
+                else
+                {
+                    binding.note.visibility = View.GONE
                 }
                 adapter.updateNotes(it)
                 progress.dismiss()

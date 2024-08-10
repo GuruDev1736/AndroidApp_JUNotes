@@ -47,6 +47,10 @@ class SubjectActivity : AppCompatActivity() {
             if (data!!.CONTENT.isEmpty()) {
                 binding.note.visibility = View.VISIBLE
             }
+            else
+            {
+                binding.note.visibility = View.GONE
+            }
 
             binding.recyclerView.adapter = NotesSubjectAdapter(this@SubjectActivity, data.CONTENT)
             progress.dismiss()
